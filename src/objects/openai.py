@@ -11,15 +11,16 @@ def is_friendzoned(message):
   client = OpenAI()
 
   # prompt for openai
-  prompt = f"You are my wingman and I'm just talking to the person of my dreams" \
+  prompt = "You are my wingman and I'm just talking to the person of my dreams" \
   "if this message seems like I got friendzoned then give me a \"YES\" otherwise" \
-  "just give me a \"NO\" message: {message}"
+  "just give me a \"NO\"."
 
   # send the message over to openAI
   response = client.chat.completions.create(
     model="gpt-4o",
-    messages=prompt
+    instructions=prompt,
+    input=message
   )
 
   # return the response of the model back to the server
-  return response.choices[0].message.content
+  return response.choices[0].message.content == "YES"
