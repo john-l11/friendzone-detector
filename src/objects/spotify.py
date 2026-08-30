@@ -33,7 +33,7 @@ def play_song():
     sp.start_playback(uris=[marvins_room_uri])
 
     # put that shit on repeat
-    sp.repeat("track")
+    sp.repeat(state="track")
     print("Now playing: Marvin's Room 🎧")
 
   except spotipy.exceptions.SpotifyException as e:
@@ -41,5 +41,5 @@ def play_song():
     # it's actually not that bad
     print(f"An error occurred: {e}")
     print(
-      "Make sure you have a Spotify app open and active on one of your devices!"
+      "To cheer you up I just want you to know you can always acknowledge others!"
     )
