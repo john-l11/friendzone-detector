@@ -16,24 +16,30 @@ def play_song():
 
   # authenticate the user
   sp = spotipy.Spotify(
-      auth_manager=SpotifyOAuth(
-          client_id=CLIENT_ID,
-          client_secret=CLIENT_SECRET,
-          redirect_uri=REDIRECT_URI,
-          scope=scope,
-      )
+    auth_manager=SpotifyOAuth(
+      client_id=CLIENT_ID,
+      client_secret=CLIENT_SECRET,
+      redirect_uri=REDIRECT_URI,
+      scope=scope,
+    )
   )
 
   # marvins room song id on spotify
   marvins_room_uri = "spotify:track:040g6Y44YgclCgA78v7X7N"
 
+  # attempt to play the song on the authenticated users account
   try:
     # play the song because of the memes
     sp.start_playback(uris=[marvins_room_uri])
+
+    # put that shit on repeat
+    sp.repeat("track")
     print("Now playing: Marvin's Room 🎧")
 
   except spotipy.exceptions.SpotifyException as e:
-      print(f"An error occurred: {e}")
-      print(
-          "Make sure you have a Spotify app open and active on one of your devices!"
-      )
+    # if an error occurs, then just enjoy being single.
+    # it's actually not that bad
+    print(f"An error occurred: {e}")
+    print(
+      "Make sure you have a Spotify app open and active on one of your devices!"
+    )
