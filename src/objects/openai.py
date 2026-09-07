@@ -22,5 +22,14 @@ def is_friendzoned(message):
     input=message
   )
 
+  # get a boolean for the response
+  friendzone = response.choices[0].message.content == "YES"
+
+  # print the status so that it's logged on to the console
+  if friendzone:
+    print("You just got friendzoned man, sorry to break it to you")
+  else:
+    print("honestly congrats, you might have to tell them your sitation though")
+
   # return the response of the model back to the server
-  return response.choices[0].message.content == "YES"
+  return friendzone
