@@ -14,14 +14,28 @@ def verify_webhook(
     hub_verify_token: str = None,
     hub_challenge: str = None,
 ):
+    '''
+    This stupid function is just required from the instagrams api so that it
+    can listen for the hooks
+    '''
     if hub_mode == "subscribe" and hub_verify_token == VERIFY_TOKEN:
         return Response(content=hub_challenge, media_type="text/plain")
     return Response(status_code=403)
 
-# make a get request that will take the message once it is 
 @app.post("/")
 async def dm_recieved(req):
+    '''
+    This post request will take the message from instagrams webhook and place
+    it into a chat with the llm of choice. If the user got friendzoned then
+    marvin's room will start to play and you have no choice but to listen to it
+    until you either
+    1. cry yourself to sleep for the night
+    2. just accept that you will find someone else who is probably more compatible
+    with you.
     
+    However if things go your way be happy. You might maybe get a ring around
+    that finger. 😘
+    '''
     body = await req.json()
 
     # this is just in case the body doesn't contain the message. We will
@@ -35,7 +49,7 @@ async def dm_recieved(req):
 
     # otherwise just mock the user and tell him that he won them over
     else:
-        print("AWWWW YOU GOT HERRRR/HIM SOO CUTEEEEEE. LOOK AT YOU LOVEBIRDS!! <3")
+        print("AWWWW YOU GOT THEM SOO CUTEEEEEE. LOOK AT YOU LOVEBIRDS!! <3")
 
-    return {"status": "ok"}
+    return Response(status_code=201)
     
